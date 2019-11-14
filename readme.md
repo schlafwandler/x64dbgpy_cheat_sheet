@@ -64,13 +64,13 @@ module_base = pluginsdk.GetMainModuleBase()
 is_64bit = pluginsdk.is_64bit()
 ```
 
-#### Get module image base from address
+#### Get module base from address
 ```python
 rip = pluginsdk.GetRIP() 
 module_base = pluginsdk.BaseFromAddr(rip) # any address in the module works
 ```
 
-#### Get module image base from module name
+#### Get module base from module name
 ```python
 kernel32_base = pluginsdk.BaseFromName("kernel32.dll") 
 ```
@@ -111,7 +111,7 @@ mem = pluginsdk.RemoteAlloc(0x1000) # Allocate 0x1000 bytes
 pluginsdk.RemoteFree(mem)
 ```
 
-### Read and manipulate a struct from memory
+#### Read and manipulate a struct from memory
 Example on how to read memory, parse it as a ctypes Structure, and write it back.
 ```python
 addr = pluginsdk.GetRSP() # or any other address
