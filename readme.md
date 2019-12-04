@@ -157,7 +157,6 @@ pluginsdk.SetBreakpoint(pluginsdk.GetRIP())
 ```
 
 #### Set breakpoint with a callback function
-See [issue #1915](https://github.com/x64dbg/x64dbg/issues/1915) for stepping/running from breakpoint handlers.
 ```python
 def callback():
     print("Breakpoint callback")
@@ -165,6 +164,19 @@ def callback():
 bp_addr = pluginsdk.GetRIP() # Example address
 Breakpoint.add(bp_addr,callback)
 ```
+See [issue #1915](https://github.com/x64dbg/x64dbg/issues/1915) for stepping/running from breakpoint handlers.
+A workaround for this is [here](https://github.com/schlafwandler/x64dbgpy_cheat_sheet#call-and-continue-breakpoint)
+
+#### Hardware breakpoints
+```python
+def callback():
+    print("Hardware breakpoint!")
+
+bp_addr = pluginsdk.GetRIP() # Example address
+Breakpoint.add(bp_addr,callback,bp_type=Breakpoint.BP_HARDWARE,hw_type=Breakpoint.HW_WRITE)
+```
+The possible values for `bp_type` are `Breakpoint.HW_ACCESS`, `Breakpoint.HW_WRITE` and `Breakpoint.HW_EXECUTE`, with `Breakpoint.HW_EXECUTE` as default.
+For stepping/running from the callback see [here](https://github.com/schlafwandler/x64dbgpy_cheat_sheet#set-breakpoint-with-a-callback-function).
 
 #### Set breakpoint at RVA
 A function to set a breakpoint at a [relative virtual address (RVA)](https://en.wikipedia.org/wiki/COFF#Relative_virtual_address).
