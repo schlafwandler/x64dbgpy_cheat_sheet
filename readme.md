@@ -13,19 +13,23 @@ pluginsdk.x64dbg.DbgCmdExecDirect("bpx 000000013F9A1330")
 ### Execution
 #### Run/continue
 ```python
-pluginsdk.debug.Run()
+pluginsdk.Run()
+```
+#### Stop
+```python
+pluginsdk.Stop()
 ```
 #### Step into
 ```python
-pluginsdk.debug.StepIn()
+pluginsdk.StepIn()
 ```
 #### Step over
 ```python
-pluginsdk.debug.StepOver()
+pluginsdk.StepOver()
 ```
 #### Step out
 ```python
-pluginsdk.debug.StepOut()
+pluginsdk.StepOut()
 ```
 
 ### Registers
