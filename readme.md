@@ -183,9 +183,20 @@ breakpoint_at_RVA(module_name,0x1000,callback)
 #### "Call and continue"-Breakpoint
 Set up a breakpoint that calls a function and continues, without interrupting the program.
 A (somewhat hacky) workaround for [issue #1915](https://github.com/x64dbg/x64dbg/issues/1915).
+
+The trick here is to set a breakpoint with a condition that's always false, and a command condition that's always true.
+That way the process is not stopped, but the command is executed anyway.
+The breakpoint command itself is `python <callback name>` and simply calls the given function.
+See the documentation for [Conditional Breakpoints](https://help.x64dbg.com/en/latest/introduction/ConditionalBreakpoint.html) for details.
+
+The process can still be paused from the callback by executing `pluginsdk.x64dbg.DbgCmdExecDirect("$breakpointcondition=1")`.
+
 ```python
 def callback():
 	print("breakpoint callback")
+
+    if Register.RAX == 0: # pause debugger if RAX==0
+        pluginsdk.x64dbg.DbgCmdExecDirect("$breakpointcondition=1")
 
 def BpxContinueAfterCallback(module_name,rva,callback):
 	module_base = pluginsdk.BaseFromName(module_name)
@@ -196,7 +207,7 @@ def BpxContinueAfterCallback(module_name,rva,callback):
 	pluginsdk.x64dbg.DbgCmdExecDirect('SetBreakpointCommand %x, "python %s()"'%(addr,callback.func_name))
 	pluginsdk.x64dbg.DbgCmdExecDirect('SetBreakpointCommandCondition %x, "1"'%(addr)) # execute the command
 
-rva = 0x15F8
+rva = 0x15F8 # some RVA
 module_name = pluginsdk.GetMainModuleName()
 BpxContinueAfterCallback(module_name,rva,callback)
 ```
