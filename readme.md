@@ -105,6 +105,12 @@ pluginsdk.Write(addr,"00000000".decode("hex"))
 pluginsdk.Write(addr,data)
 ```
 
+#### Test if pointer is valid
+```python
+if pluginsdk.IsValidPtr(Register.RBX):
+	print("RBX is a valid pointer")
+```
+
 #### Allocate memory in debuggee
 ```python
 mem = pluginsdk.RemoteAlloc(0x1000) # Allocate 0x1000 bytes
