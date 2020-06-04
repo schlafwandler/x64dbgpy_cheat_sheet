@@ -196,6 +196,22 @@ Breakpoint.add(bp_addr,callback,bp_type=Breakpoint.BP_HARDWARE,hw_type=Breakpoin
 The possible values for `bp_type` are `Breakpoint.HW_ACCESS`, `Breakpoint.HW_WRITE` and `Breakpoint.HW_EXECUTE`, with `Breakpoint.HW_EXECUTE` as default.
 For stepping/running from the callback see [here](https://github.com/schlafwandler/x64dbgpy_cheat_sheet#set-breakpoint-with-a-callback-function).
 
+Alternative interface:
+Access:
+```python
+pluginsdk.SetHardwareBreakpoint(Register.EIP,0)
+```
+Write:
+```python
+pluginsdk.SetHardwareBreakpoint(Register.EIP,1)
+```
+Execute (default):
+```python
+pluginsdk.SetHardwareBreakpoint(bp_addr)
+# defaults to
+pluginsdk.SetHardwareBreakpoint(Register.EIP,2)
+```
+
 #### Set breakpoint at RVA
 A function to set a breakpoint at a [relative virtual address (RVA)](https://en.wikipedia.org/wiki/COFF#Relative_virtual_address).
 ```python
