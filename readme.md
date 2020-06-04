@@ -79,6 +79,11 @@ module_base = pluginsdk.BaseFromAddr(rip) # any address in the module works
 kernel32_base = pluginsdk.BaseFromName("kernel32.dll") 
 ```
 
+#### Get module name from address
+```python
+module_name = pluginsdk.NameFromAddr(Register.EIP)
+```
+
 #### GetProcAddress
 ```python
 p_IsDebuggerPresent = pluginsdk.RemoteGetProcAddress('kernel32', 'IsDebuggerPresent')
