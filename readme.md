@@ -98,6 +98,19 @@ size = 8
 data = pluginsdk.Read(addr,size)
 ```
 
+#### Read int from memory
+```python
+x = pluginsdk.ReadByte(Register.ESP)
+x = pluginsdk.ReadWord(Register.ESP)
+x = pluginsdk.ReadDword(Register.ESP)
+x = pluginsdk.ReadPtr(Register.ESP)
+# or
+def ReadInt(addr,size):
+    bytestr = pluginsdk.Read(addr,size)
+    return int(bytestr[::-1].encode("hex"),16)
+x = ReadInt(Register.ESP,4)
+```
+
 #### Write to memory
 ```python
 pluginsdk.Write(addr,"AAAAAAAA")
