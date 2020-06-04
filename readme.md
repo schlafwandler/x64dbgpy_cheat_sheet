@@ -224,6 +224,12 @@ module_name = pluginsdk.GetMainModuleName()
 BpxContinueAfterCallback(module_name,rva,callback)
 ```
 
+#### Delete breakpoint (pluginsdk)
+```python
+pluginsdk.DeleteBreakpoint(pluginsdk.GetRIP())
+```
+(might create problems with breakpoints created with `Breakpoint.add`)
+
 ## GUI
 #### MessageBox
 ```python
