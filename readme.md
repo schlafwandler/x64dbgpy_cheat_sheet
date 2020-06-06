@@ -123,6 +123,13 @@ pluginsdk.Write(addr,"00000000".decode("hex"))
 pluginsdk.Write(addr,data)
 ```
 
+#### Write int to memory
+```python
+pluginsdk.WriteByte(addr,0)
+pluginsdk.WriteWord(addr,0)
+pluginsdk.WriteDword(addr,0)
+```
+
 #### Test if pointer is valid
 ```python
 if pluginsdk.IsValidPtr(Register.RBX):
@@ -196,7 +203,7 @@ Breakpoint.add(bp_addr,callback,bp_type=Breakpoint.BP_HARDWARE,hw_type=Breakpoin
 The possible values for `bp_type` are `Breakpoint.HW_ACCESS`, `Breakpoint.HW_WRITE` and `Breakpoint.HW_EXECUTE`, with `Breakpoint.HW_EXECUTE` as default.
 For stepping/running from the callback see [here](https://github.com/schlafwandler/x64dbgpy_cheat_sheet#set-breakpoint-with-a-callback-function).
 
-Alternative interface:
+#####Alternative interface
 Access:
 ```python
 pluginsdk.SetHardwareBreakpoint(Register.EIP,0)
